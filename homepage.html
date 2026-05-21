@@ -70,6 +70,54 @@
     a { text-decoration: none; color: inherit; }
 
     /* ============================================================
+       HERO CAROUSEL
+    ============================================================ */
+    .hero-carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      transform: scale(1.05);
+      animation: heroZoom 8s ease-in-out infinite alternate;
+    }
+    .hero-slide.active {
+      opacity: 1;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.0); }
+      to { transform: scale(1.08); }
+    }
+    .hero-dots {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transition: all 0.4s;
+      cursor: pointer;
+    }
+    .hero-dot.active {
+      background: var(--gold);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* ============================================================
        REVEAL ANIMATIONS
     ============================================================ */
     .reveal {
@@ -1149,7 +1197,7 @@
         <li><a href="#assessment">Assessment</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold nav-cta" aria-label="Book a free consultation">Free Consultation</a>
+      <a href="assessment.html" class="btn-gold nav-cta" aria-label="Take your skin assessment">Skin Assessment</a>
     </div>
   </nav>
 
@@ -1157,11 +1205,19 @@
        HERO - cinematic full viewport
   ============================================================ -->
   <section class="hero" aria-labelledby="hero-heading" id="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
+    <!-- Carousel background images -->
+    <div class="hero-carousel" aria-hidden="true">
+      <div class="hero-slide active" style="background-image:url('https://infinityskincareclinic.com.au/wp-content/uploads/2025/02/Results-1.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://amorsui.com.au/wp-content/uploads/2024/11/Cosmetic-Enhancers.png')"></div>
+      <div class="hero-slide" style="background-image:url('https://infinityskincareclinic.com.au/wp-content/uploads/2025/02/Results-5.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://amorsui.com.au/wp-content/uploads/2026/03/IMG_8992-937x1024.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('https://infinityskincareclinic.com.au/wp-content/uploads/2025/02/Results-3.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://amorsui.com.au/wp-content/uploads/2024/11/Oxygen-Therapy-Facial.png')"></div>
+    </div>
     <div class="hero-overlay" aria-hidden="true"></div>
 
     <div class="hero-content">
-      <p class="hero-location" aria-label="Location">Non-Surgical Aesthetic Clinic &nbsp;-&nbsp; Tarneit</p>
+      <p class="hero-location" aria-label="Location">Non-Surgical Aesthetic Clinic - Tarneit</p>
       <h1 id="hero-heading">
         You deserve to feel as beautiful as you already are
       </h1>
@@ -1170,9 +1226,19 @@
         Where science meets self-love. Expert-led, non-surgical treatments designed around you.
       </p>
       <div class="hero-actions">
-        <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold">Book Your Free Consultation</a>
-        <a href="tel:0451910328" class="btn-outline-white">Call 0451 910 328</a>
+        <a href="#concerns" class="btn-gold">Discover Your Pathway</a>
+        <a href="assessment.html" class="btn-outline-white">Take the Skin Assessment</a>
       </div>
+    </div>
+
+    <!-- Carousel dots -->
+    <div class="hero-dots" aria-hidden="true">
+      <span class="hero-dot active"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
     </div>
 
     <div class="scroll-indicator" aria-hidden="true">
@@ -1430,10 +1496,10 @@
       <h2 id="final-cta-heading" class="reveal reveal-delay-1">Your skin transformation begins with a conversation</h2>
       <span class="gold-rule-center reveal reveal-delay-2" aria-hidden="true"></span>
       <p class="final-cta-sub reveal reveal-delay-3">
-        A complimentary consultation with Charm - no pressure, no jargon, just an honest assessment of what's possible.
+        A consultation with Charm - no pressure, no jargon, just an honest assessment of what's possible for your skin.
       </p>
       <div class="final-cta-actions reveal reveal-delay-4">
-        <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold">Book Your Free Consultation</a>
+        <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold">Book a Consultation</a>
         <a href="tel:0451910328" class="btn-outline-white">Call 0451 910 328</a>
       </div>
       <p class="final-cta-address reveal reveal-delay-5">Tarneit, VIC &nbsp;-&nbsp; Serving Wyndham, Point Cook, Werribee &amp; Melbourne's West</p>
@@ -1505,17 +1571,27 @@
       window.addEventListener('scroll', updateNav, { passive: true });
       updateNav(); /* Run on load */
 
-      /* --- HERO PARALLAX: subtle background shift --- */
-      var heroBg = document.querySelector('.hero-bg');
+      /* --- HERO CAROUSEL --- */
+      var slides = document.querySelectorAll('.hero-slide');
+      var dots = document.querySelectorAll('.hero-dot');
+      var currentSlide = 0;
+      var slideCount = slides.length;
 
-      function heroParallax() {
-        var scrolled = window.scrollY;
-        if (scrolled < window.innerHeight) {
-          heroBg.style.transform = 'translateY(' + (scrolled * 0.28) + 'px)';
-        }
+      function goToSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = n % slideCount;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
       }
 
-      window.addEventListener('scroll', heroParallax, { passive: true });
+      setInterval(function() {
+        goToSlide(currentSlide + 1);
+      }, 4000);
+
+      dots.forEach(function(dot, i) {
+        dot.addEventListener('click', function() { goToSlide(i); });
+      });
 
       /* --- INTERSECTION OBSERVER: scroll reveal --- */
       var observer = new IntersectionObserver(function (entries) {

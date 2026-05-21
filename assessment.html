@@ -868,8 +868,8 @@
               />
             </div>
 
-            <button type="submit" class="btn-gold" aria-label="Get my free skin plan">
-              Get My Free Skin Plan
+            <button type="submit" class="btn-gold" aria-label="Get my personalised skin plan">
+              Get My Personalised Skin Plan
             </button>
 
             <p class="form-note">No spam. Just your personalised recommendation from Charm.</p>
@@ -901,9 +901,9 @@
             class="btn-gold"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Book your free consultation at Amor Sui"
+            aria-label="Book your consultation at Amor Sui"
           >
-            Book Your Free Consultation
+            Book a Consultation
           </a>
 
           <p class="result-call">
@@ -956,7 +956,7 @@
             options: ['More glow and radiance', 'Better hydration', 'Smoother, softer skin', 'All of the above']
           }
         ],
-        resultCopy: "Your skin is craving deep nourishment and renewal. A complimentary consultation with Charm will assess your hydration levels, skin health, and map out a plan to restore your natural radiance."
+        resultCopy: "Your skin is craving deep nourishment and renewal. A consultation with Charm will assess your hydration levels, skin health, and map out a plan to restore your natural radiance."
       },
       2: {
         questions: [
@@ -976,7 +976,7 @@
             options: ["I'm being proactive", "I've been noticing changes recently", "It's been bothering me for a while", "I'm exploring my options"]
           }
         ],
-        resultCopy: "Lines and volume loss respond beautifully to the right approach. A complimentary consultation with Charm will assess your skin's structure and design a non-surgical plan that delivers natural, lasting results."
+        resultCopy: "Lines and volume loss respond beautifully to the right approach. A consultation with Charm will assess your skin's structure and design a non-surgical plan that delivers natural, lasting results."
       },
       3: {
         questions: [
@@ -996,7 +996,7 @@
             options: ['I cover it with makeup', 'I avoid certain lighting', 'It affects my confidence daily', 'I just want smoother skin']
           }
         ],
-        resultCopy: "Texture concerns need targeted attention - and that's exactly what Charm specialises in. A complimentary consultation will assess your skin at a clinical level and build a clear path to smoother, clearer skin."
+        resultCopy: "Texture concerns need targeted attention - and that's exactly what Charm specialises in. A consultation will assess your skin at a clinical level and build a clear path to smoother, clearer skin."
       }
     };
 
@@ -1186,7 +1186,7 @@
       document.getElementById('result-name').textContent = state.leadName;
       const copy = pathData[state.selectedPath]
         ? pathData[state.selectedPath].resultCopy
-        : "A complimentary consultation with Charm will create a personalised plan for your skin.";
+        : "A consultation with Charm will create a personalised plan for your skin.";
       document.getElementById('result-copy').textContent = copy;
     }
 
