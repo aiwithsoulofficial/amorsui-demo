@@ -3,140 +3,192 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amor Sui Aesthetic Clinic  -  Tarneit</title>
+  <title>Amor Sui Aesthetic Clinic - Non-Surgical Aesthetics, Tarneit</title>
+  <meta name="description" content="Expert-led non-surgical aesthetic treatments in Tarneit, Wyndham, Point Cook, Werribee and Melbourne's west. Led by Registered Nurse Charm Sarical." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* ============================================================
-       TOKENS
+       DESIGN TOKENS
     ============================================================ */
     :root {
-      --gold:        #BC9050;
-      --gold-light:  #D4B87A;
-      --gold-dark:   #9A7540;
-      --cream:       #FDF8F1;
-      --cream-soft:  #F5EDE2;
-      --cream-deep:  #E8DBCA;
-      --charcoal:    #1E1E1E;
-      --charcoal-mid:#3A3A3A;
-      --text-muted:  #7A7268;
-      --radius:      10px;
-      --nav-h:       72px;
-      --banner-h:    28px;
-      --ann-h:       40px;
+      --gold:          #BC9050;
+      --gold-light:    #D4B87A;
+      --gold-dark:     #9A7540;
+      --gold-faint:    rgba(188, 144, 80, 0.08);
+      --cream:         #FDF8F1;
+      --cream-soft:    #F5EDE2;
+      --cream-deep:    #E8DBCA;
+      --charcoal:      #1E1E1E;
+      --charcoal-mid:  #3A3A3A;
+      --text-muted:    #8A8078;
+      --white:         #ffffff;
+      --banner-h:      32px;
+      --nav-h:         80px;
     }
 
     /* ============================================================
        RESET & BASE
     ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Outfit', sans-serif;
+      font-weight: 300;
       background-color: var(--cream);
       color: var(--charcoal-mid);
       font-size: 16px;
-      line-height: 1.65;
-      position: relative;
+      line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* Linen grain texture overlay */
-    body::before {
+    /* Linen grain - ultra-subtle, z-indexed above everything */
+    body::after {
       content: '';
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 0;
-      opacity: 0.35;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      z-index: 9000;
+      opacity: 0.018;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     }
 
-    /* All content sits above grain */
-    body > * { position: relative; z-index: 1; }
-
-    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+    }
 
     img { display: block; max-width: 100%; }
-
     a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       REVEAL ANIMATIONS
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.32s; }
+    .reveal-delay-4 { transition-delay: 0.44s; }
+    .reveal-delay-5 { transition-delay: 0.56s; }
 
     /* ============================================================
        UTILITY
     ============================================================ */
     .container {
-      width: min(1160px, 92%);
+      width: min(1200px, 90%);
       margin-inline: auto;
-    }
-
-    .btn-gold {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 30px;
-      border-radius: var(--radius);
-      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      border: none;
-      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 18px rgba(188, 144, 80, 0.35);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    }
-    .btn-gold:hover {
-      opacity: 0.92;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 28px rgba(188, 144, 80, 0.45);
-    }
-
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 28px;
-      border-radius: var(--radius);
-      border: 1.5px solid var(--gold);
-      color: var(--gold);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 500;
-      font-size: 0.95rem;
-      cursor: pointer;
-      background: transparent;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-ghost:hover {
-      background: var(--gold);
-      color: #fff;
     }
 
     .section-tag {
       display: inline-block;
       font-family: 'Outfit', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
-      background: rgba(188, 144, 80, 0.1);
-      border: 1px solid rgba(188, 144, 80, 0.25);
-      padding: 5px 14px;
-      border-radius: 40px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
-    .gold-divider {
+    .gold-rule {
+      display: block;
+      width: 40px;
       height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--gold-light) 30%, var(--gold) 50%, var(--gold-light) 70%, transparent 100%);
-      width: 100%;
+      background: var(--gold);
+      margin: 22px 0;
+    }
+
+    .gold-rule-center {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 22px auto;
+    }
+
+    /* Grain overlay for dark sections */
+    .grain-overlay {
+      position: relative;
+    }
+    .grain-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+    .grain-overlay > * { position: relative; z-index: 2; }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: var(--gold);
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--gold);
+      transition: background 0.3s, letter-spacing 0.3s, transform 0.2s;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-dark);
+      border-color: var(--gold-dark);
+      letter-spacing: 0.18em;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 34px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .btn-outline-white:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.07);
     }
 
     /* ============================================================
@@ -153,76 +205,35 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
     }
 
     .cc-banner span {
       color: #00D4BC;
       font-family: 'Outfit', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
     }
 
-    .cc-banner .cc-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #00D4BC;
-      opacity: 0.6;
-    }
-
     /* ============================================================
-       ANNOUNCEMENT BAR
+       NAVIGATION (frosted glass, floating)
     ============================================================ */
-    .ann-bar {
+    .nav {
       position: fixed;
       top: var(--banner-h);
       left: 0;
       right: 0;
-      z-index: 9998;
-      height: var(--ann-h);
-      background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold) 40%, var(--gold-light) 70%, var(--gold) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ann-bar p {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: #fff;
-      letter-spacing: 0.05em;
-      text-align: center;
-    }
-
-    .ann-bar a {
-      color: #fff;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    /* ============================================================
-       NAVIGATION
-    ============================================================ */
-    .nav {
-      position: fixed;
-      top: calc(var(--banner-h) + var(--ann-h));
-      left: 0;
-      right: 0;
-      z-index: 9997;
+      z-index: 9990;
       height: var(--nav-h);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      background: rgba(253, 248, 241, 0.82);
-      border-bottom: 1px solid rgba(188, 144, 80, 0.18);
-      transition: box-shadow 0.3s;
+      transition: background 0.4s, box-shadow 0.4s;
     }
 
-    .nav.scrolled {
-      box-shadow: 0 4px 24px rgba(30, 30, 30, 0.08);
+    .nav.solid {
+      background: rgba(253, 248, 241, 0.94);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      box-shadow: 0 1px 0 rgba(188, 144, 80, 0.12);
     }
 
     .nav-inner {
@@ -230,940 +241,812 @@
       align-items: center;
       justify-content: space-between;
       height: 100%;
-      width: min(1160px, 92%);
+      width: min(1200px, 90%);
       margin-inline: auto;
     }
 
     .nav-logo img {
-      height: 44px;
+      height: 46px;
       width: auto;
+      filter: brightness(0) invert(1);
+      transition: filter 0.4s;
     }
 
-    .nav-right {
+    .nav.solid .nav-logo img {
+      filter: none;
+    }
+
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 40px;
+      list-style: none;
     }
 
-    .nav-phone {
-      font-size: 0.9rem;
-      font-weight: 500;
+    .nav-links a {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.3s;
+    }
+
+    .nav.solid .nav-links a {
       color: var(--charcoal-mid);
-      display: flex;
-      align-items: center;
-      gap: 7px;
     }
 
-    .nav-phone svg { flex-shrink: 0; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav.solid .nav-links a:hover { color: var(--gold); }
 
     .nav-cta {
-      padding: 10px 22px;
-      font-size: 0.88rem;
+      padding: 11px 26px;
+      font-size: 0.73rem;
+      letter-spacing: 0.14em;
     }
 
     /* ============================================================
-       PAGE OFFSET (for fixed bars)
-    ============================================================ */
-    .page-offset {
-      height: calc(var(--banner-h) + var(--ann-h) + var(--nav-h));
-    }
-
-    /* ============================================================
-       HERO
+       HERO - cinematic full-viewport
     ============================================================ */
     .hero {
-      padding: 80px 0 90px;
       position: relative;
+      height: 100vh;
+      min-height: 700px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
     }
 
-    /* Soft radial gold glow */
-    .hero::after {
-      content: '';
+    .hero-bg {
       position: absolute;
-      top: -120px;
-      right: -180px;
-      width: 700px;
-      height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(188, 144, 80, 0.12) 0%, transparent 70%);
-      pointer-events: none;
+      inset: 0;
+      background-image: url('https://amorsui.com.au/wp-content/uploads/2026/03/IMG_8992-937x1024.jpeg');
+      background-size: cover;
+      background-position: center top;
+      will-change: transform;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+    /* Bottom-up gradient overlay */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(15, 12, 8, 0.82) 0%,
+        rgba(15, 12, 8, 0.45) 40%,
+        rgba(15, 12, 8, 0.08) 75%,
+        transparent 100%
+      );
     }
 
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 24px 100px;
+      max-width: 760px;
+      width: 100%;
+    }
+
+    .hero-location {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--gold-dark);
-      background: rgba(188, 144, 80, 0.1);
-      border: 1px solid rgba(188, 144, 80, 0.3);
-      padding: 6px 16px;
-      border-radius: 40px;
+      color: var(--gold-light);
       margin-bottom: 24px;
-    }
-
-    .hero-tag::before {
-      content: '';
-      display: block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 4vw, 3.6rem);
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--charcoal);
-      margin-bottom: 22px;
+      font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--white);
+      margin-bottom: 0;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s forwards;
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--gold-dark);
+    .hero-rule {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 28px auto;
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
     }
 
     .hero-sub {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 36px;
-      max-width: 480px;
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+      font-weight: 200;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.75;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
     }
 
     .hero-actions {
       display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
     }
 
-    .hero-proof {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .hero-stars {
-      color: var(--gold);
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-    }
-
-    .hero-proof-text {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* Hero image side */
-    .hero-visual {
-      position: relative;
-    }
-
-    .hero-img-wrap {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 24px 64px rgba(30, 30, 30, 0.14);
-    }
-
-    .hero-img-wrap img {
-      width: 100%;
-      height: 540px;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-
-    .hero-badge {
+    /* Scroll indicator */
+    .scroll-indicator {
       position: absolute;
-      top: 18px;
-      left: 18px;
-      background: rgba(253, 248, 241, 0.95);
-      border: 1px solid rgba(188, 144, 80, 0.35);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      color: var(--gold-dark);
-      text-transform: uppercase;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 6px;
-      backdrop-filter: blur(8px);
+      opacity: 0;
+      animation: fadeIn 1s ease 1.8s forwards;
     }
 
-    .hero-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-
-    .example-note {
-      position: absolute;
-      bottom: 14px;
-      right: 14px;
-      background: rgba(30, 30, 30, 0.72);
-      color: rgba(255,255,255,0.82);
+    .scroll-indicator span {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.67rem;
-      font-style: italic;
-      padding: 5px 10px;
-      border-radius: 6px;
-      letter-spacing: 0.02em;
-      backdrop-filter: blur(4px);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .scroll-chevron {
+      width: 18px;
+      height: 18px;
+      border-right: 1px solid rgba(255,255,255,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      transform: rotate(45deg);
+      animation: chevronBounce 1.6s ease-in-out infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes chevronBounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(5px); }
     }
 
     /* ============================================================
-       DIVIDER
+       INTRO PHILOSOPHY
     ============================================================ */
-    .section-divider {
-      padding: 0;
+    .intro {
+      background: var(--cream);
+      padding: 130px 0 120px;
     }
 
-    /* ============================================================
-       PROBLEM CARDS
-    ============================================================ */
-    .problems {
-      padding: 88px 0;
-      position: relative;
+    .intro-inner {
+      max-width: 680px;
     }
 
-    .problems::before {
-      content: '';
-      position: absolute;
-      bottom: -80px;
-      left: -200px;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(188, 144, 80, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .problems-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .problems-header h2 {
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 600;
+    .intro-inner h2 {
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      font-weight: 500;
       color: var(--charcoal);
-      margin-bottom: 14px;
       line-height: 1.2;
+      margin-bottom: 0;
     }
 
-    .problems-header p {
+    .intro-inner p {
       font-size: 1rem;
+      font-weight: 300;
       color: var(--text-muted);
-      max-width: 520px;
-      margin-inline: auto;
+      line-height: 1.92;
+      max-width: 560px;
     }
 
-    .problem-cards {
+    /* ============================================================
+       CONCERN SECTIONS - editorial splits
+    ============================================================ */
+    .concern {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      grid-template-columns: 1fr 1fr;
+      min-height: 85vh;
     }
 
-    .problem-card {
-      background: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--cream-deep);
-      transition: transform 0.25s, box-shadow 0.25s;
-      box-shadow: 0 4px 20px rgba(30, 30, 30, 0.06);
-    }
-
-    .problem-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(188, 144, 80, 0.15);
-    }
-
-    .card-img-wrap {
+    .concern-img {
       position: relative;
-      height: 240px;
       overflow: hidden;
     }
 
-    .card-img-wrap img {
+    .concern-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      transition: transform 0.4s ease;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    .problem-card:hover .card-img-wrap img {
-      transform: scale(1.04);
+    .concern:hover .concern-img img {
+      transform: scale(1.03);
     }
 
-    .card-example-badge {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(30, 30, 30, 0.7);
-      color: rgba(255,255,255,0.8);
-      font-size: 0.63rem;
-      font-style: italic;
-      padding: 4px 9px;
-      border-radius: 5px;
-      letter-spacing: 0.02em;
-      backdrop-filter: blur(4px);
+    .concern-body {
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(60px, 8vw, 110px) clamp(48px, 7vw, 96px);
     }
 
-    .card-body {
-      padding: 28px;
-    }
+    /* Alternate: cream-soft for second */
+    .concern-body.alt { background: var(--cream-soft); }
 
-    .card-body h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      line-height: 1.25;
-      color: var(--charcoal);
-      margin-bottom: 12px;
-    }
+    /* Alternate: deep for third */
+    .concern-body.deep { background: var(--cream-deep); }
 
-    .card-body p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.65;
+    .concern-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
       margin-bottom: 20px;
     }
 
-    .card-link {
-      font-size: 0.88rem;
-      font-weight: 600;
+    .concern-body h2 {
+      font-size: clamp(1.9rem, 2.8vw, 2.7rem);
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.18;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .concern-body p {
+      font-size: 0.97rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.88;
+      max-width: 440px;
+      margin-bottom: 32px;
+    }
+
+    .concern-cta {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--gold-dark);
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      letter-spacing: 0.02em;
-      transition: gap 0.2s;
+      gap: 10px;
+      transition: gap 0.3s, color 0.3s;
+      margin-bottom: 36px;
     }
 
-    .card-link:hover { gap: 10px; }
+    .concern-cta::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold-dark);
+      transition: width 0.3s;
+    }
+
+    .concern-cta:hover { gap: 14px; color: var(--gold); }
+    .concern-cta:hover::after { width: 40px; background: var(--gold); }
+
+    /* BA image in concern section */
+    .concern-ba {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .concern-ba-frame {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border: 1px solid rgba(188,144,80,0.2);
+    }
+
+    .concern-ba-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .concern-ba-caption {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
 
     /* ============================================================
-       STATS STRIP
+       CREDENTIALS STRIP - dark drama
     ============================================================ */
-    .stats-strip {
+    .credentials {
       background: var(--charcoal);
-      padding: 52px 0;
-      position: relative;
-      overflow: hidden;
+      padding: 72px 0;
     }
 
-    /* Grain on dark section */
-    .stats-strip::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.25;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .stats-inner {
-      position: relative;
+    .credentials-inner {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 0;
       flex-wrap: wrap;
     }
 
-    .stat-item {
+    .cred-item {
       text-align: center;
-      padding: 20px 60px;
-      border-right: 1px solid rgba(188, 144, 80, 0.2);
+      padding: 20px 64px;
+      border-right: 1px solid rgba(188,144,80,0.18);
     }
 
-    .stat-item:last-child { border-right: none; }
+    .cred-item:last-child { border-right: none; }
 
-    .stat-number {
+    .cred-value {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3.2rem;
-      font-weight: 700;
+      font-size: 2.2rem;
+      font-weight: 500;
       color: var(--gold-light);
       line-height: 1;
       margin-bottom: 8px;
+      letter-spacing: 0.02em;
     }
 
-    .stat-label {
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+    .cred-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.45);
     }
 
     /* ============================================================
-       HOW IT WORKS
+       TESTIMONIALS - editorial pull-quote style
     ============================================================ */
-    .how-it-works {
-      padding: 96px 0;
-      background: var(--cream-soft);
-      position: relative;
-      overflow: hidden;
+    .testimonials {
+      background: var(--cream);
+      padding: 130px 0 120px;
     }
 
-    .how-it-works::after {
-      content: '';
+    .testi-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .testi-header h2 {
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    /* Hero testimonial - pull quote */
+    .testi-hero {
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto 80px;
+      padding: 0 40px;
+    }
+
+    .testi-hero-mark {
       position: absolute;
-      top: -100px;
-      right: -150px;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(188, 144, 80, 0.1) 0%, transparent 70%);
+      top: -20px;
+      left: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      line-height: 1;
+      color: var(--gold-light);
+      opacity: 0.35;
+      font-weight: 300;
+      user-select: none;
       pointer-events: none;
     }
 
-    .how-grid {
+    .testi-hero blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.58;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 28px;
+    }
+
+    .testi-hero-author {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .testi-hero-stars {
+      color: var(--gold-light);
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    /* Secondary testimonial cards */
+    .testi-cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: center;
+      gap: 1px;
+      background: rgba(188,144,80,0.12);
+      border: 1px solid rgba(188,144,80,0.12);
     }
 
-    .how-left h2 {
-      font-size: clamp(1.9rem, 3vw, 2.9rem);
-      font-weight: 600;
-      color: var(--charcoal);
-      margin-bottom: 14px;
-      line-height: 1.2;
-    }
-
-    .how-left > p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      margin-bottom: 44px;
-      max-width: 440px;
-    }
-
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .step {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-
-    .step-num {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      color: #fff;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(188, 144, 80, 0.3);
-    }
-
-    .step-content h4 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--charcoal);
-      margin-bottom: 5px;
-    }
-
-    .step-content p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .how-right {
-      position: relative;
-    }
-
-    .how-img-wrap {
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 20px 56px rgba(30, 30, 30, 0.12);
-    }
-
-    .how-img-wrap img {
-      width: 100%;
-      height: 520px;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-
-    .how-img-badge {
-      position: absolute;
-      bottom: -18px;
-      left: 24px;
+    .testi-card {
       background: var(--cream);
-      border: 1px solid rgba(188, 144, 80, 0.3);
-      border-radius: 10px;
-      padding: 14px 20px;
-      box-shadow: 0 8px 28px rgba(30, 30, 30, 0.1);
+      padding: 44px 48px;
     }
 
-    .how-img-badge p {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--gold-dark);
+    .testi-card-stars {
+      color: var(--gold);
+      font-size: 0.76rem;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+    }
+
+    .testi-card blockquote {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--charcoal-mid);
+      line-height: 1.82;
+      margin-bottom: 24px;
+    }
+
+    .testi-card-author {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      color: var(--gold-dark);
     }
 
-    .how-img-badge span {
+    .testi-card-detail {
+      display: block;
       font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
       color: var(--text-muted);
+      text-transform: none;
+      margin-top: 2px;
     }
 
     /* ============================================================
-       CHARM TRUST SECTION
+       MEET CHARM - split section
     ============================================================ */
-    .charm-section {
-      padding: 100px 0;
-      background: var(--cream-deep);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .charm-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.2;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .charm-grid {
-      position: relative;
+    .meet-charm {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 72px;
-      align-items: center;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
     }
 
-    .charm-img-wrap {
-      border-radius: 14px;
+    .charm-content-side {
+      background: var(--cream-deep);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(60px, 8vw, 110px) clamp(48px, 7vw, 96px);
+    }
+
+    .charm-name {
+      font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+
+    .charm-title-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold-dark);
+      margin-bottom: 28px;
+    }
+
+    .charm-content-side p {
+      font-size: 0.96rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.9;
+      max-width: 460px;
+      margin-bottom: 16px;
+    }
+
+    .charm-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .charm-cred {
+      display: inline-block;
+      padding: 7px 18px;
+      border: 1px solid rgba(188,144,80,0.3);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+    }
+
+    .charm-img-side {
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 56px rgba(30, 30, 30, 0.12);
     }
 
-    .charm-img-wrap img {
+    .charm-img-side img {
       width: 100%;
-      height: 500px;
+      height: 100%;
       object-fit: cover;
       object-position: center top;
       display: block;
     }
 
-    .charm-content .section-tag { margin-bottom: 8px; }
-
-    .charm-content h2 {
-      font-size: clamp(2rem, 3.2vw, 3rem);
-      font-weight: 600;
-      color: var(--charcoal);
-      margin-bottom: 8px;
-      line-height: 1.15;
-    }
-
-    .charm-title {
-      font-size: 0.88rem;
-      color: var(--gold-dark);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 24px;
-    }
-
-    .charm-content p {
-      font-size: 0.95rem;
-      color: var(--charcoal-mid);
-      line-height: 1.75;
-      margin-bottom: 16px;
-    }
-
-    .charm-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 32px;
-    }
-
-    .charm-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 16px;
-      border-radius: 40px;
-      border: 1px solid rgba(188, 144, 80, 0.35);
-      background: rgba(188, 144, 80, 0.08);
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--gold-dark);
-      letter-spacing: 0.04em;
-    }
-
-    .charm-pill::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-
     /* ============================================================
-       TESTIMONIALS
+       SKIN ASSESSMENT CTA
     ============================================================ */
-    .testimonials {
-      padding: 96px 0;
-      background: var(--cream);
-      position: relative;
-    }
-
-    .testimonials::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(188, 144, 80, 0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .testimonials-header {
+    .assessment-cta {
+      background: var(--cream-soft);
+      padding: 130px 0;
       text-align: center;
-      margin-bottom: 56px;
     }
 
-    .testimonials-header h2 {
-      font-size: clamp(2rem, 3.2vw, 3rem);
-      font-weight: 600;
+    .assessment-cta h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 500;
       color: var(--charcoal);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      line-height: 1.18;
     }
 
-    .testimonials-header p {
-      font-size: 0.95rem;
+    .assessment-cta p {
+      font-size: 1rem;
+      font-weight: 300;
       color: var(--text-muted);
-    }
-
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      position: relative;
-    }
-
-    .testi-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 32px;
-      border: 1px solid var(--cream-deep);
-      box-shadow: 0 4px 20px rgba(30, 30, 30, 0.05);
-      position: relative;
-      transition: box-shadow 0.25s;
-    }
-
-    .testi-card:hover {
-      box-shadow: 0 12px 36px rgba(188, 144, 80, 0.12);
-    }
-
-    .testi-quote-mark {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      line-height: 0.6;
-      color: var(--gold-light);
-      margin-bottom: 16px;
-      opacity: 0.7;
-    }
-
-    .testi-stars {
-      color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      margin-bottom: 16px;
-    }
-
-    .testi-text {
-      font-size: 0.93rem;
-      color: var(--charcoal-mid);
-      line-height: 1.72;
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .testi-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    .testi-name {
-      font-weight: 600;
-      font-size: 0.88rem;
-      color: var(--charcoal);
-    }
-
-    .testi-detail {
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      line-height: 1.82;
+      max-width: 520px;
+      margin: 0 auto 44px;
     }
 
     /* ============================================================
-       FINAL CTA
+       FINAL CTA - dark with image
     ============================================================ */
     .final-cta {
-      padding: 100px 0;
-      background: var(--charcoal);
       position: relative;
-      overflow: hidden;
+      padding: 140px 0;
       text-align: center;
+      overflow: hidden;
     }
 
-    .final-cta::before {
-      content: '';
+    .final-cta-bg {
       position: absolute;
       inset: 0;
-      opacity: 0.2;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      pointer-events: none;
+      background-image: url('https://amorsui.com.au/wp-content/uploads/2024/11/PDO-Threads.png');
+      background-size: cover;
+      background-position: center;
     }
 
-    .final-cta::after {
-      content: '';
+    .final-cta-overlay {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 700px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(188, 144, 80, 0.15) 0%, transparent 70%);
-      pointer-events: none;
+      inset: 0;
+      background: rgba(14, 11, 7, 0.88);
     }
 
     .final-cta-inner {
       position: relative;
-      z-index: 2;
+      z-index: 10;
     }
 
     .final-cta h2 {
-      font-size: clamp(2.2rem, 4vw, 3.6rem);
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 16px;
-      line-height: 1.2;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.18;
+      max-width: 700px;
+      margin: 0 auto 20px;
     }
 
-    .final-cta h2 em {
-      font-style: italic;
-      color: var(--gold-light);
-    }
-
-    .final-cta p {
+    .final-cta-sub {
+      font-family: 'Outfit', sans-serif;
       font-size: 1rem;
+      font-weight: 200;
       color: rgba(255,255,255,0.65);
-      margin-bottom: 40px;
-      max-width: 500px;
-      margin-inline: auto;
+      line-height: 1.78;
+      max-width: 480px;
+      margin: 0 auto 52px;
     }
 
     .final-cta-actions {
       display: flex;
+      align-items: center;
       justify-content: center;
+      gap: 18px;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
     }
 
-    .btn-cream {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 30px;
-      border-radius: var(--radius);
-      background: var(--cream);
-      color: var(--gold-dark);
+    .final-cta-address {
       font-family: 'Outfit', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.38);
     }
-
-    .btn-cream:hover {
-      background: #fff;
-      transform: translateY(-1px);
-    }
-
-    .contact-info {
-      display: flex;
-      justify-content: center;
-      gap: 36px;
-      flex-wrap: wrap;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.55);
-    }
-
-    .contact-item a {
-      color: rgba(255,255,255,0.7);
-      transition: color 0.2s;
-    }
-
-    .contact-item a:hover { color: var(--gold-light); }
 
     /* ============================================================
        FOOTER
     ============================================================ */
     footer {
-      background: #111;
-      padding: 56px 0 32px;
-      border-top: 1px solid rgba(188, 144, 80, 0.15);
+      background: #131010;
+      padding: 72px 0 36px;
     }
 
-    .footer-top {
+    .footer-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
+      grid-template-columns: 1.8fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(188,144,80,0.1);
+      margin-bottom: 32px;
     }
 
     .footer-brand img {
-      height: 44px;
+      height: 40px;
       width: auto;
-      margin-bottom: 16px;
       filter: brightness(0) invert(1);
-      opacity: 0.85;
+      opacity: 0.7;
+      margin-bottom: 20px;
     }
 
     .footer-brand p {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.65;
-      max-width: 280px;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.75;
+      max-width: 300px;
     }
 
     .footer-col h5 {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .footer-col ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 12px;
     }
 
     .footer-col ul li a {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
-      transition: color 0.2s;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.25s;
+      letter-spacing: 0.02em;
     }
 
     .footer-col ul li a:hover { color: var(--gold-light); }
 
     .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding-top: 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: gap;
+      flex-wrap: wrap;
       gap: 12px;
     }
 
     .footer-bottom p {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.3);
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.22);
+      line-height: 1.6;
     }
 
-    .footer-tagline {
-      font-size: 0.75rem;
-      color: rgba(188, 144, 80, 0.5);
-      font-style: italic;
+    .footer-cc {
+      font-size: 0.62rem;
+      font-weight: 300;
+      color: rgba(0, 212, 188, 0.35);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-seo {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.18);
+      line-height: 1.55;
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       PAGE OFFSET (fixed bars height)
+    ============================================================ */
+    .page-top-offset {
+      height: calc(var(--banner-h) + var(--nav-h));
     }
 
     /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 1024px) {
-      .hero-grid,
-      .how-grid,
-      .charm-grid {
+      .concern {
         grid-template-columns: 1fr;
-        gap: 48px;
+        min-height: auto;
       }
 
-      .hero-img-wrap img { height: 420px; }
-      .how-img-wrap img { height: 380px; }
-      .charm-img-wrap img { height: 380px; }
+      .concern-img {
+        height: 55vw;
+        min-height: 320px;
+      }
 
-      .how-right { order: -1; }
+      /* Restore visual order for alternating layout on mobile */
+      .concern.flip .concern-img { order: -1; }
 
-      .charm-grid { direction: ltr; }
+      .meet-charm {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
 
-      .footer-top {
+      .charm-img-side {
+        height: 70vw;
+        min-height: 360px;
+        order: -1;
+      }
+
+      .testi-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
         grid-template-columns: 1fr 1fr;
+        gap: 40px;
       }
 
       .footer-brand {
@@ -1173,61 +1056,73 @@
 
     @media (max-width: 768px) {
       :root {
-        --nav-h: 64px;
-        --ann-h: 36px;
+        --nav-h: 68px;
       }
 
-      .problem-cards,
-      .testi-grid {
-        grid-template-columns: 1fr;
+      .nav-links { display: none; }
+
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
+
+      .hero-content { padding: 0 20px 80px; }
+
+      .concern-body {
+        padding: clamp(44px, 8vw, 72px) clamp(28px, 6vw, 56px);
       }
 
-      .stat-item {
+      .cred-item {
         padding: 20px 36px;
         border-right: none;
-        border-bottom: 1px solid rgba(188, 144, 80, 0.15);
+        border-bottom: 1px solid rgba(188,144,80,0.15);
+        width: 50%;
       }
 
-      .stat-item:last-child { border-bottom: none; }
+      .cred-item:nth-child(odd) { border-right: 1px solid rgba(188,144,80,0.15); }
+      .cred-item:nth-child(3),
+      .cred-item:nth-child(4) { border-bottom: none; }
 
-      .stats-inner {
-        flex-direction: column;
-        align-items: center;
+      .testi-hero { padding: 0 20px; }
+
+      .testi-hero blockquote { font-size: 1.4rem; }
+
+      .testi-card { padding: 32px 28px; }
+
+      .charm-content-side {
+        padding: clamp(44px, 8vw, 72px) clamp(28px, 6vw, 56px);
       }
 
-      .footer-top {
+      .final-cta-actions { flex-direction: column; align-items: center; }
+
+      .footer-grid {
         grid-template-columns: 1fr;
         gap: 32px;
       }
 
+      .footer-brand { grid-column: auto; }
+
       .footer-bottom {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
       }
 
-      .nav-phone { display: none; }
-
-      .hero { padding: 56px 0 64px; }
-
-      .hero h1 { font-size: 2.2rem; }
-
-      .how-grid { gap: 36px; }
-
-      .charm-grid { gap: 36px; }
-
-      .contact-info {
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .hero-img-wrap img { height: 340px; }
+      .intro { padding: 80px 0 72px; }
+      .assessment-cta { padding: 80px 0; }
+      .testimonials { padding: 80px 0; }
     }
 
     @media (max-width: 480px) {
-      .hero-actions { flex-direction: column; align-items: flex-start; }
-      .final-cta-actions { flex-direction: column; align-items: center; }
-      .btn-gold, .btn-cream, .btn-ghost { width: 100%; justify-content: center; }
+      .btn-gold, .btn-outline-white {
+        width: 100%;
+        text-align: center;
+      }
+
+      .cred-item {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(188,144,80,0.15);
+      }
+      .cred-item:last-child { border-bottom: none; }
+
+      .hero-actions { flex-direction: column; }
     }
   </style>
 </head>
@@ -1236,307 +1131,186 @@
   <!-- ============================================================
        CC DEMO BANNER
   ============================================================ -->
-  <div class="cc-banner">
-    <div class="cc-dot"></div>
-    <span>Clinic Catalyst Demo &mdash; Amor Sui Aesthetic Clinic</span>
-    <div class="cc-dot"></div>
+  <div class="cc-banner" role="banner">
+    <span>Clinic Catalyst Demo &nbsp;-&nbsp; Amor Sui Aesthetic Clinic</span>
   </div>
 
   <!-- ============================================================
-       ANNOUNCEMENT BAR
+       NAVIGATION
   ============================================================ -->
-  <div class="ann-bar">
-    <p>New client? Your first consultation is <strong>complimentary</strong> &mdash; <a href="https://bookings.gettimely.com/amorsui/bb/book">Book your free session today &rarr;</a></p>
-  </div>
-
-  <!-- ============================================================
-       NAV
-  ============================================================ -->
-  <nav class="nav" id="main-nav">
+  <nav class="nav" id="main-nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="#" class="nav-logo" aria-label="Amor Sui home">
-        <img src="https://amorsui.com.au/wp-content/uploads/2024/10/Amor-Sui-Logo-200x106.png" alt="Amor Sui Aesthetic Clinic" />
+        <img src="https://amorsui.com.au/wp-content/uploads/2024/10/Amor-Sui-Logo-200x106.png" alt="Amor Sui Aesthetic Clinic" width="200" height="106" />
       </a>
-      <div class="nav-right">
-        <a href="tel:0451910328" class="nav-phone" aria-label="Call us">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          0451 910 328
-        </a>
-        <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold nav-cta">Free Consultation</a>
-      </div>
+      <ul class="nav-links" role="list">
+        <li><a href="#philosophy">About</a></li>
+        <li><a href="#concerns">Concerns</a></li>
+        <li><a href="#assessment">Assessment</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold nav-cta" aria-label="Book a free consultation">Free Consultation</a>
     </div>
   </nav>
 
-  <!-- Spacer for fixed bars -->
-  <div class="page-offset" aria-hidden="true"></div>
+  <!-- ============================================================
+       HERO - cinematic full viewport
+  ============================================================ -->
+  <section class="hero" aria-labelledby="hero-heading" id="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <p class="hero-location" aria-label="Location">Non-Surgical Aesthetic Clinic &nbsp;-&nbsp; Tarneit</p>
+      <h1 id="hero-heading">
+        You deserve to feel as beautiful as you already are
+      </h1>
+      <span class="hero-rule" aria-hidden="true"></span>
+      <p class="hero-sub">
+        Where science meets self-love. Expert-led, non-surgical treatments designed around you.
+      </p>
+      <div class="hero-actions">
+        <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold">Book Your Free Consultation</a>
+        <a href="tel:0451910328" class="btn-outline-white">Call 0451 910 328</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Explore</span>
+      <div class="scroll-chevron"></div>
+    </div>
+  </section>
 
   <!-- ============================================================
-       HERO
+       PHILOSOPHY INTRO
   ============================================================ -->
-  <section class="hero" aria-labelledby="hero-heading">
+  <section class="intro" id="philosophy" aria-labelledby="intro-heading">
     <div class="container">
-      <div class="hero-grid">
-
-        <!-- Left: Copy -->
-        <div class="hero-copy">
-          <div class="hero-tag">
-            <span>Tarneit's Non-Surgical Aesthetic Clinic</span>
-          </div>
-
-          <h1 id="hero-heading">
-            You deserve to feel as<br />
-            <em>beautiful as you already are</em>
-          </h1>
-
-          <p class="hero-sub">
-            If you've been staring in the mirror noticing things that didn't used to be there - lines that weren't as deep, skin that felt firmer, a face that felt more like <em>you</em> - you're in the right place. Charm helps real women feel at home in their skin again, without surgery, without downtime, without guesswork.
-          </p>
-
-          <div class="hero-actions">
-            <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Book Your Free Consultation
-            </a>
-            <a href="tel:0451910328" class="btn-ghost">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              Call Charm
-            </a>
-          </div>
-
-          <div class="hero-proof" aria-label="5-star rated clinic">
-            <div class="hero-stars" aria-hidden="true">★★★★★</div>
-            <p class="hero-proof-text">Trusted by women across Wyndham &amp; Melbourne's West</p>
-          </div>
-        </div>
-
-        <!-- Right: B&A image -->
-        <div class="hero-visual">
-          <div class="hero-img-wrap">
-            <img
-              src="https://infinityskincareclinic.com.au/wp-content/uploads/2025/02/Results-1.jpg"
-              alt="Before and after skin transformation result"
-              loading="eager"
-            />
-            <div class="hero-badge">Real Client Result</div>
-            <div class="example-note">Example - your results here</div>
-          </div>
-        </div>
-
+      <div class="intro-inner">
+        <p class="section-tag reveal">Our Philosophy</p>
+        <h2 id="intro-heading" class="reveal reveal-delay-1">We believe beauty should feel effortless</h2>
+        <span class="gold-rule reveal reveal-delay-2" aria-hidden="true"></span>
+        <p class="reveal reveal-delay-3">
+          Amor Sui means 'self-love'. Every treatment we offer begins with listening to what you need - not selling you a procedure. Charm Sarical, Registered Nurse with over 15 years of clinical experience, leads every consultation personally. You are not a treatment menu. You are a person with a story, and we take the time to hear it.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Gold divider -->
-  <div class="section-divider">
-    <div class="gold-divider"></div>
-  </div>
-
   <!-- ============================================================
-       PROBLEM CARDS
+       THREE CONCERNS - editorial split sections
   ============================================================ -->
-  <section class="problems" aria-labelledby="problems-heading">
-    <div class="container">
+  <div id="concerns" aria-label="Skin concerns we address">
 
-      <div class="problems-header">
-        <div class="section-tag">Sound familiar?</div>
-        <h2 id="problems-heading">What's bothering you?</h2>
-        <p>Whatever you're seeing in the mirror, there's a gentle, non-surgical path forward. Tell us what's on your mind.</p>
+    <!-- CONCERN 01 - image left, text right -->
+    <article class="concern" aria-labelledby="concern-1-heading">
+      <div class="concern-img reveal">
+        <img
+          src="https://amorsui.com.au/wp-content/uploads/2024/11/Cosmetic-Enhancers.png"
+          alt="Non-surgical lifting and volumising treatment"
+          loading="lazy"
+        />
       </div>
+      <div class="concern-body">
+        <p class="concern-num reveal">Concern 01</p>
+        <h2 id="concern-1-heading" class="reveal reveal-delay-1">I want to look younger without going under the knife</h2>
+        <p class="reveal reveal-delay-2">
+          Fine lines creeping in. Your jawline softening. You don't want surgery - you want to look like the best version of yourself. Our non-surgical lifting and volumising treatments work with your body's natural structure to restore what time has shifted.
+        </p>
+        <a href="#assessment" class="concern-cta reveal reveal-delay-3">Explore this pathway</a>
+        <div class="concern-ba reveal reveal-delay-4" aria-label="Example result image">
+          <div class="concern-ba-frame">
+            <img
+              src="https://infinityskincareclinic.com.au/wp-content/uploads/2025/02/Results-1.jpg"
+              alt="Example before and after skin result"
+              loading="lazy"
+            />
+          </div>
+          <p class="concern-ba-caption">Example result - individual outcomes vary</p>
+        </div>
+      </div>
+    </article>
 
-      <div class="problem-cards">
-
-        <!-- Card 1: Aging / glow -->
-        <div class="problem-card">
-          <div class="card-img-wrap">
+    <!-- CONCERN 02 - text left, image right (flipped) -->
+    <article class="concern flip" aria-labelledby="concern-2-heading">
+      <div class="concern-body alt">
+        <p class="concern-num reveal">Concern 02</p>
+        <h2 id="concern-2-heading" class="reveal reveal-delay-1">My skin has lost its glow and nothing I try is working</h2>
+        <p class="reveal reveal-delay-2">
+          Dull, tired skin that doesn't match how you feel inside. Products sit on the surface. You've tried everything the beauty counter offers. What you need is clinical-grade renewal that works deeper than any cream can reach.
+        </p>
+        <a href="#assessment" class="concern-cta reveal reveal-delay-3">Explore this pathway</a>
+        <div class="concern-ba reveal reveal-delay-4" aria-label="Example result image">
+          <div class="concern-ba-frame">
             <img
               src="https://infinityskincareclinic.com.au/wp-content/uploads/2025/02/Results-5.jpg"
-              alt="Skin glow and fine lines result"
+              alt="Example skin glow and radiance result"
               loading="lazy"
             />
-            <div class="card-example-badge">Example - your results here</div>
           </div>
-          <div class="card-body">
-            <h3>"My skin has lost its glow and I can see every line"</h3>
-            <p>You wake up looking tired when you're not. Fine lines seem deeper than they did last year. The brightness and bounce your skin used to have feels like it's quietly slipped away.</p>
-            <a href="https://bookings.gettimely.com/amorsui/bb/book" class="card-link">
-              Get your skin plan &rarr;
-            </a>
-          </div>
+          <p class="concern-ba-caption">Example result - individual outcomes vary</p>
         </div>
+      </div>
+      <div class="concern-img reveal">
+        <img
+          src="https://amorsui.com.au/wp-content/uploads/2024/10/SQT-Bio-Microneedling-1-1024x683.jpg"
+          alt="SQT Bio-Microneedling skin renewal treatment"
+          loading="lazy"
+        />
+      </div>
+    </article>
 
-        <!-- Card 2: Lift / firm -->
-        <div class="problem-card">
-          <div class="card-img-wrap">
-            <img
-              src="https://infinityskincareclinic.com.au/wp-content/uploads/2025/02/Results-1.jpg"
-              alt="Non-surgical lifting and firming result"
-              loading="lazy"
-            />
-            <div class="card-example-badge">Example - your results here</div>
-          </div>
-          <div class="card-body">
-            <h3>"I want to look refreshed without going under the knife"</h3>
-            <p>You want a lifted, defined, more youthful version of yourself - but surgery feels extreme and the idea of a frozen or overdone look puts you off. There's a middle ground, and Charm lives there.</p>
-            <a href="https://bookings.gettimely.com/amorsui/bb/book" class="card-link">
-              Get your skin plan &rarr;
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 3: Texture -->
-        <div class="problem-card">
-          <div class="card-img-wrap">
+    <!-- CONCERN 03 - image left, text right -->
+    <article class="concern" aria-labelledby="concern-3-heading">
+      <div class="concern-img reveal">
+        <img
+          src="https://amorsui.com.au/wp-content/uploads/2024/11/Skin-Boosters.png"
+          alt="Skin texture and clarity treatment"
+          loading="lazy"
+        />
+      </div>
+      <div class="concern-body deep">
+        <p class="concern-num reveal">Concern 03</p>
+        <h2 id="concern-3-heading" class="reveal reveal-delay-1">My skin texture is rough and I've been hiding it for years</h2>
+        <p class="reveal reveal-delay-2">
+          Acne marks that never faded. Pores you can see in every mirror. You avoid certain lighting, angle your face in photos. We see this every day - and we know how to change it. Clinical skin resurfacing that actually delivers the smoother, clearer skin you've been chasing.
+        </p>
+        <a href="#assessment" class="concern-cta reveal reveal-delay-3">Explore this pathway</a>
+        <div class="concern-ba reveal reveal-delay-4" aria-label="Example result image">
+          <div class="concern-ba-frame">
             <img
               src="https://infinityskincareclinic.com.au/wp-content/uploads/2025/02/Results-3.jpg"
-              alt="Skin texture and clarity result"
+              alt="Example skin texture improvement result"
               loading="lazy"
             />
-            <div class="card-example-badge">Example - your results here</div>
           </div>
-          <div class="card-body">
-            <h3>"My skin texture is uneven and nothing seems to fix it"</h3>
-            <p>Acne scars that won't fade. Enlarged pores you can't get smooth. Rough, bumpy patches that make you self-conscious without makeup. You've tried every product - it's time for something that actually works.</p>
-            <a href="https://bookings.gettimely.com/amorsui/bb/book" class="card-link">
-              Get your skin plan &rarr;
-            </a>
-          </div>
+          <p class="concern-ba-caption">Example result - individual outcomes vary</p>
         </div>
-
       </div>
-    </div>
-  </section>
+    </article>
 
-  <!-- Gold divider -->
-  <div class="section-divider">
-    <div class="gold-divider"></div>
   </div>
 
   <!-- ============================================================
-       STATS STRIP
+       CREDENTIALS STRIP
   ============================================================ -->
-  <section class="stats-strip" aria-label="Clinic credentials">
-    <div class="container">
-      <div class="stats-inner">
-        <div class="stat-item">
-          <div class="stat-number">15+</div>
-          <div class="stat-label">Years Clinical Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">TGA Approved Products</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Surgical Procedures</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">RN</div>
-          <div class="stat-label">Registered Nurse Led</div>
-        </div>
+  <section class="credentials grain-overlay" aria-label="Clinic credentials">
+    <div class="credentials-inner">
+      <div class="cred-item reveal">
+        <p class="cred-value">15+</p>
+        <p class="cred-label">Years Clinical Experience</p>
       </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       HOW IT WORKS
-  ============================================================ -->
-  <section class="how-it-works" aria-labelledby="how-heading">
-    <div class="container">
-      <div class="how-grid">
-
-        <!-- Left: steps -->
-        <div class="how-left">
-          <div class="section-tag">Your journey</div>
-          <h2 id="how-heading">Simple, personalised care from day one</h2>
-          <p>No pushy sales, no one-size-fits-all menus. Just an honest conversation about your skin - and a plan built around you.</p>
-
-          <div class="steps">
-            <div class="step">
-              <div class="step-num">1</div>
-              <div class="step-content">
-                <h4>Free consultation with Charm</h4>
-                <p>A relaxed, no-obligation chat about what's bothering you. Charm listens first, advises second.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">2</div>
-              <div class="step-content">
-                <h4>Your personalised treatment plan</h4>
-                <p>A clear, plain-English plan tailored to your skin, your goals, and your budget. No jargon, no surprises.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <h4>Gentle, non-surgical treatments</h4>
-                <p>Everything is done with precision and care. Real results that still look like <em>you</em>, just refreshed.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">4</div>
-              <div class="step-content">
-                <h4>Ongoing care and check-ins</h4>
-                <p>Charm follows up to make sure you love your results. Your skin journey doesn't end when you leave the clinic.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: image -->
-        <div class="how-right">
-          <div class="how-img-wrap">
-            <img
-              src="https://amorsui.com.au/wp-content/uploads/2026/03/IMG_8992-937x1024.jpeg"
-              alt="Charm Sarical performing a gentle aesthetic treatment"
-              loading="lazy"
-            />
-          </div>
-          <div class="how-img-badge">
-            <p>Completely non-surgical</p>
-            <span>All treatments by registered nurse Charm Sarical</span>
-          </div>
-        </div>
-
+      <div class="cred-item reveal reveal-delay-1">
+        <p class="cred-value">RN</p>
+        <p class="cred-label">Registered Nurse</p>
       </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       CHARM TRUST SECTION
-  ============================================================ -->
-  <section class="charm-section" aria-labelledby="charm-heading">
-    <div class="container">
-      <div class="charm-grid">
-
-        <!-- Image -->
-        <div class="charm-img-wrap">
-          <img
-            src="https://amorsui.com.au/wp-content/uploads/2024/11/Cosmetic-Enhancers.png"
-            alt="Amor Sui clinic treatment setting"
-            loading="lazy"
-          />
-        </div>
-
-        <!-- Content -->
-        <div class="charm-content">
-          <div class="section-tag">Your clinician</div>
-          <h2 id="charm-heading">Meet Charm Sarical, RN</h2>
-          <p class="charm-title">Registered Nurse &middot; Aesthetic Clinician &middot; 15+ Years Clinical Experience</p>
-
-          <p>Before aesthetics, Charm spent over a decade working in emergency and ICU nursing - environments where precision, care under pressure, and genuine empathy aren't optional. That clinical foundation shapes everything she does in the clinic today.</p>
-
-          <p>When she transitioned into aesthetics, Charm made a deliberate choice: non-surgical only. She believes you should never have to go under the knife to feel like yourself again. Every treatment she recommends is TGA approved, and for anything requiring a prescription, she works alongside telehealth doctors to ensure your safety comes first.</p>
-
-          <p>At Amor Sui, you're not a number on a booking sheet. You're a woman with a story, and Charm takes the time to hear it.</p>
-
-          <div class="charm-pills">
-            <span class="charm-pill">Registered Nurse</span>
-            <span class="charm-pill">15+ Years Clinical</span>
-            <span class="charm-pill">TGA Approved Only</span>
-            <span class="charm-pill">Non-Surgical Specialist</span>
-          </div>
-        </div>
-
+      <div class="cred-item reveal reveal-delay-2">
+        <p class="cred-value">100%</p>
+        <p class="cred-label">TGA Approved Products</p>
+      </div>
+      <div class="cred-item reveal reveal-delay-3">
+        <p class="cred-value">0</p>
+        <p class="cred-label">Surgical Procedures</p>
       </div>
     </div>
   </section>
@@ -1547,153 +1321,216 @@
   <section class="testimonials" aria-labelledby="testi-heading">
     <div class="container">
 
-      <div class="testimonials-header">
-        <div class="section-tag">Real words, real women</div>
-        <h2 id="testi-heading">What our clients say</h2>
-        <p>From Tarneit to Wyndham and beyond - women who finally feel at home in their skin.</p>
+      <div class="testi-header">
+        <p class="section-tag reveal">Words from our clients</p>
+        <h2 id="testi-heading" class="reveal reveal-delay-1">Real women, real results</h2>
+        <span class="gold-rule-center reveal reveal-delay-2" aria-hidden="true"></span>
       </div>
 
-      <div class="testi-grid">
+      <!-- Hero pull-quote -->
+      <div class="testi-hero reveal">
+        <span class="testi-hero-mark" aria-hidden="true">&ldquo;</span>
+        <div class="testi-hero-stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>
+          I was nervous about trying anything new but Charm made me feel completely at ease. The results have been absolutely incredible - my skin looks years younger and I couldn't be happier. I'm already recommending her to all my friends.
+        </blockquote>
+        <p class="testi-hero-author">Emily J. &nbsp;-&nbsp; PRP Treatment &nbsp;-&nbsp; Tarneit</p>
+      </div>
 
-        <!-- Testimonial 1 -->
+      <!-- Secondary cards -->
+      <div class="testi-cards reveal reveal-delay-1">
+
         <div class="testi-card">
-          <div class="testi-quote-mark" aria-hidden="true">&ldquo;</div>
-          <div class="testi-stars" aria-label="5 stars">★★★★★</div>
-          <p class="testi-text">I was nervous about trying anything new but Charm made me feel completely at ease. The results have been absolutely incredible - my skin looks years younger and I couldn't be happier. I'm already recommending her to all my friends.</p>
-          <div class="testi-author">
-            <div class="testi-avatar" aria-hidden="true">E</div>
-            <div>
-              <p class="testi-name">Emily J.</p>
-              <p class="testi-detail">PRP treatment &middot; Tarneit</p>
-            </div>
-          </div>
+          <div class="testi-card-stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>
+            Charm is so knowledgeable and takes the time to truly understand what you need. She doesn't push products or treatments - she listens and creates a plan that actually makes sense for you. Absolutely love my results.
+          </blockquote>
+          <p class="testi-card-author">
+            Sophia D.
+            <span class="testi-card-detail">Personalised skin plan &nbsp;-&nbsp; Wyndham</span>
+          </p>
         </div>
 
-        <!-- Testimonial 2 -->
         <div class="testi-card">
-          <div class="testi-quote-mark" aria-hidden="true">&ldquo;</div>
-          <div class="testi-stars" aria-label="5 stars">★★★★★</div>
-          <p class="testi-text">Charm is so knowledgeable and takes the time to truly understand what you need. She doesn't push products or treatments - she listens and creates a plan that actually makes sense for you. Absolutely love my results.</p>
-          <div class="testi-author">
-            <div class="testi-avatar" aria-hidden="true">S</div>
-            <div>
-              <p class="testi-name">Sophia D.</p>
-              <p class="testi-detail">Personalised skin plan &middot; Wyndham</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="testi-card">
-          <div class="testi-quote-mark" aria-hidden="true">&ldquo;</div>
-          <div class="testi-stars" aria-label="5 stars">★★★★★</div>
-          <p class="testi-text">Brilliant service from start to finish. I felt so welcomed and cared for throughout my whole experience. Charm's clinical expertise really shines through - you can tell she genuinely cares about getting you the best result possible.</p>
-          <div class="testi-author">
-            <div class="testi-avatar" aria-hidden="true">S</div>
-            <div>
-              <p class="testi-name">Samantha K.</p>
-              <p class="testi-detail">Skin renewal &middot; Melbourne's West</p>
-            </div>
-          </div>
+          <div class="testi-card-stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>
+            Brilliant service from start to finish. I felt so welcomed and cared for throughout. Charm's clinical expertise really shines through - you can tell she genuinely cares about getting you the best result possible.
+          </blockquote>
+          <p class="testi-card-author">
+            Samantha K.
+            <span class="testi-card-detail">Skin renewal &nbsp;-&nbsp; Melbourne's West</span>
+          </p>
         </div>
 
       </div>
+
     </div>
   </section>
 
   <!-- ============================================================
-       FINAL CTA
+       MEET CHARM
   ============================================================ -->
-  <section class="final-cta" aria-labelledby="cta-heading">
-    <div class="container">
-      <div class="final-cta-inner">
-        <div class="section-tag" style="color:#D4B87A; background: rgba(188,144,80,0.15); border-color: rgba(188,144,80,0.25);">Ready when you are</div>
-        <h2 id="cta-heading">Your transformation starts with<br /><em>one conversation</em></h2>
-        <p>No pressure, no commitment, no jargon. Just Charm, your skin, and an honest plan that feels right for you.</p>
+  <section class="meet-charm" aria-labelledby="charm-heading">
 
-        <div class="final-cta-actions">
-          <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Book My Free Consultation
-          </a>
-          <a href="tel:0451910328" class="btn-cream">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            Call 0451 910 328
-          </a>
-        </div>
-
-        <div class="contact-info">
-          <div class="contact-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Tarneit, Wyndham, Melbourne's West</span>
-          </div>
-          <div class="contact-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <a href="tel:0451910328">0451 910 328</a>
-          </div>
-          <div class="contact-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="https://amorsui.com.au">amorsui.com.au</a>
-          </div>
-        </div>
+    <div class="charm-content-side">
+      <p class="section-tag reveal">Your Practitioner</p>
+      <h2 id="charm-heading" class="charm-name reveal reveal-delay-1">Charm Sarical, RN</h2>
+      <p class="charm-title-tag reveal reveal-delay-2">Registered Nurse &amp; Director</p>
+      <span class="gold-rule reveal reveal-delay-2" aria-hidden="true"></span>
+      <p class="reveal reveal-delay-3">
+        Before aesthetics, Charm spent over a decade working in ICU and Emergency nursing - environments where precision, care under pressure, and genuine empathy aren't optional. That clinical foundation shapes everything she does in the clinic today.
+      </p>
+      <p class="reveal reveal-delay-3">
+        She made a deliberate choice: non-surgical only. You should never have to go under the knife to feel like yourself again. Every treatment is TGA approved, and all prescription items are prescribed through telehealth doctors for your safety.
+      </p>
+      <p class="reveal reveal-delay-4">
+        At Amor Sui, every plan is built around the individual. Your face, your goals, your timeline.
+      </p>
+      <div class="charm-credentials reveal reveal-delay-5">
+        <span class="charm-cred">Registered Nurse</span>
+        <span class="charm-cred">15+ Yrs Clinical</span>
+        <span class="charm-cred">TGA Approved</span>
+        <span class="charm-cred">Non-Surgical Specialist</span>
       </div>
+    </div>
+
+    <div class="charm-img-side reveal">
+      <img
+        src="https://amorsui.com.au/wp-content/uploads/2024/11/Oxygen-Therapy-Facial.png"
+        alt="Charm Sarical performing an aesthetic treatment at Amor Sui"
+        loading="lazy"
+      />
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       SKIN ASSESSMENT CTA
+  ============================================================ -->
+  <section class="assessment-cta" id="assessment" aria-labelledby="assessment-heading">
+    <div class="container">
+      <p class="section-tag reveal">Not sure where to start?</p>
+      <h2 id="assessment-heading" class="reveal reveal-delay-1">Take our 60-second skin assessment</h2>
+      <span class="gold-rule-center reveal reveal-delay-2" aria-hidden="true"></span>
+      <p class="reveal reveal-delay-3">
+        Answer a few honest questions about how your skin feels - not treatment names - and we'll recommend your ideal starting point. No jargon. No overwhelm. Just a clear direction.
+      </p>
+      <a href="assessment.html" class="btn-gold reveal reveal-delay-4" aria-label="Start your skin assessment">Start My Assessment</a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA - image background
+  ============================================================ -->
+  <section class="final-cta" id="contact" aria-labelledby="final-cta-heading">
+    <div class="final-cta-bg" aria-hidden="true"></div>
+    <div class="final-cta-overlay" aria-hidden="true"></div>
+    <div class="container final-cta-inner">
+      <p class="section-tag reveal" style="color: var(--gold-light);">Your next step</p>
+      <h2 id="final-cta-heading" class="reveal reveal-delay-1">Your skin transformation begins with a conversation</h2>
+      <span class="gold-rule-center reveal reveal-delay-2" aria-hidden="true"></span>
+      <p class="final-cta-sub reveal reveal-delay-3">
+        A complimentary consultation with Charm - no pressure, no jargon, just an honest assessment of what's possible.
+      </p>
+      <div class="final-cta-actions reveal reveal-delay-4">
+        <a href="https://bookings.gettimely.com/amorsui/bb/book" class="btn-gold">Book Your Free Consultation</a>
+        <a href="tel:0451910328" class="btn-outline-white">Call 0451 910 328</a>
+      </div>
+      <p class="final-cta-address reveal reveal-delay-5">Tarneit, VIC &nbsp;-&nbsp; Serving Wyndham, Point Cook, Werribee &amp; Melbourne's West</p>
     </div>
   </section>
 
   <!-- ============================================================
        FOOTER
   ============================================================ -->
-  <footer>
+  <footer aria-label="Site footer">
     <div class="container">
-      <div class="footer-top">
+      <div class="footer-grid">
 
         <div class="footer-brand">
           <img src="https://amorsui.com.au/wp-content/uploads/2024/10/Amor-Sui-Logo-200x106.png" alt="Amor Sui Aesthetic Clinic" />
-          <p>Amor Sui Aesthetic Clinic &mdash; Tarneit, Wyndham, Melbourne's West. Non-surgical aesthetics by Registered Nurse Charm Sarical. TGA approved treatments, personalised care, real results.</p>
+          <p>Non-surgical aesthetics by Registered Nurse Charm Sarical. TGA approved treatments. Personalised care, real results.</p>
+          <p class="footer-seo">Amor Sui Aesthetic Clinic - Non-surgical aesthetics in Tarneit, Wyndham, Point Cook, Werribee, and Melbourne's west</p>
         </div>
 
         <div class="footer-col">
           <h5>Explore</h5>
           <ul>
             <li><a href="https://bookings.gettimely.com/amorsui/bb/book">Book a Consultation</a></li>
+            <li><a href="assessment.html">Skin Assessment</a></li>
             <li><a href="https://amorsui.com.au">Visit Website</a></li>
             <li><a href="tel:0451910328">Call the Clinic</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5>Concerns We Help With</h5>
+          <h5>Concerns</h5>
           <ul>
-            <li><a href="https://bookings.gettimely.com/amorsui/bb/book">Skin Ageing &amp; Fine Lines</a></li>
-            <li><a href="https://bookings.gettimely.com/amorsui/bb/book">Uneven Texture &amp; Scarring</a></li>
-            <li><a href="https://bookings.gettimely.com/amorsui/bb/book">Lift, Volume &amp; Firmness</a></li>
-            <li><a href="https://bookings.gettimely.com/amorsui/bb/book">Dull or Tired-Looking Skin</a></li>
+            <li><a href="#concerns">Skin Ageing &amp; Fine Lines</a></li>
+            <li><a href="#concerns">Loss of Glow</a></li>
+            <li><a href="#concerns">Uneven Texture</a></li>
+            <li><a href="#concerns">Lift &amp; Firmness</a></li>
           </ul>
         </div>
 
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2025 Amor Sui Aesthetic Clinic &mdash; Tarneit, Wyndham, Melbourne's West. All rights reserved.</p>
-        <p class="footer-tagline">Amor Sui &mdash; love of self.</p>
+        <div>
+          <p>&copy; 2025 Amor Sui Aesthetic Clinic. All rights reserved.</p>
+        </div>
+        <p class="footer-cc">Powered by Clinic Catalyst</p>
       </div>
     </div>
   </footer>
 
   <!-- ============================================================
-       NAV SCROLL EFFECT
+       JAVASCRIPT - scroll effects & reveal observer
   ============================================================ -->
   <script>
     (function () {
+      'use strict';
+
+      /* --- NAV: transparent over hero, solid on scroll --- */
       var nav = document.getElementById('main-nav');
-      function onScroll() {
-        if (window.scrollY > 20) {
-          nav.classList.add('scrolled');
+
+      function updateNav() {
+        if (window.scrollY > 60) {
+          nav.classList.add('solid');
         } else {
-          nav.classList.remove('scrolled');
+          nav.classList.remove('solid');
         }
       }
-      window.addEventListener('scroll', onScroll, { passive: true });
+
+      window.addEventListener('scroll', updateNav, { passive: true });
+      updateNav(); /* Run on load */
+
+      /* --- HERO PARALLAX: subtle background shift --- */
+      var heroBg = document.querySelector('.hero-bg');
+
+      function heroParallax() {
+        var scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+          heroBg.style.transform = 'translateY(' + (scrolled * 0.28) + 'px)';
+        }
+      }
+
+      window.addEventListener('scroll', heroParallax, { passive: true });
+
+      /* --- INTERSECTION OBSERVER: scroll reveal --- */
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        observer.observe(el);
+      });
+
     })();
   </script>
 
